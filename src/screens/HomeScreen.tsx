@@ -9,6 +9,10 @@ const HomeScreen = ({navigation} : any) => {
             <View style={styles.botonContenedor}>
                 <Button title="Ver usuarios" onPress={() => navigation.navigate('UserList')} />
             </View>
+            <Text style={styles.titulo}>Crear</Text>
+            <View style={styles.botonContenedor}>
+                <Button title="Crear usuario" onPress={() => navigation.navigate('CreateUser')} />
+            </View>
         </View>
     )
 }

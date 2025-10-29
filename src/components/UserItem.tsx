@@ -10,7 +10,7 @@ const UserItem = ({user}: Props) => {
     const dateStr = user.creadoEn ?? user.createdAt ?? '';
     return (
         <View style = {styles.card}>  
-            <Text style = {styles.name}>{user.name}</Text>
+            <Text style = {styles.name}>{user.nombre}</Text>
             <Text>{user.email}</Text>
             {dateStr ? <Text style = {styles.date}>{new Date(dateStr).toLocaleString()}</Text> : null}
         </View>
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     name: {
+        color: '#555',
         fontWeight: 'bold',
         marginBottom: 4,
     },
