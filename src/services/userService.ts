@@ -7,11 +7,23 @@ export interface User{
     creadoEn?: string
     createdAt?: string
 }
-//Traer usuarios
+//Ver usuarios
 export const getUsers = async() : Promise<User[]> => {
     const {data} = await api.get('/users')
     return data
 }
+
+//Ver usuario por id
+export const getUserById = async(id:number) : Promise<User | undefined> => {
+    try {
+        const {data} = await api.get(`/users/${id}`)
+        return data
+    } catch (error) {
+        const all = await getUsers()
+        return all.find(user => user.id === id)
+    }
+}
+
 //crear usuario
 export const createUser = async(payload:{nombre: string, email: string}) => {
     const {data} = await api.post('/users', payload)
