@@ -27,7 +27,7 @@ const UserListScreen = ({navigation}: any) => {
             <FlatList
             data={users}
             keyExtractor={it => it.id.toString()}
-            renderItem={({item}) => <UserItem user={item} />}
+            renderItem={({item}) => <UserItem user={item} onEdit={() => navigation.navigate('UpdateUser', { id: item.id })} />}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={async () => {setRefreshing(true); await load(); setRefreshing(false);}} />}
             />
 

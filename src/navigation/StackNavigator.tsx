@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import UserListScreen from "../screens/UserListScreen";
 import CreateUserScreen from "../screens/CreateUserScreen";
+import UpdateUserScreen from "../screens/UpdateUserScreen";
 
 const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
@@ -22,6 +23,11 @@ const StackNavigator = () => {
             name="CreateUser"
             component={CreateUserScreen}
             options={{title: 'Crear Usuario'}}
+            />
+            <Stack.Screen
+            name="UpdateUser"
+            component={UpdateUserScreen}
+            options={{title: 'Actualizar Usuario'}}
             />
         </Stack.Navigator>
     )

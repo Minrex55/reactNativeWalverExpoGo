@@ -4,15 +4,20 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 
 interface Props {
     user: any
+    onEdit: () => void
 }
 
-const UserItem = ({user}: Props) => {
+const UserItem = ({user, onEdit}: Props) => {
     const dateStr = user.creadoEn ?? user.createdAt ?? '';
     return (
         <View style = {styles.card}>  
             <Text style = {styles.name}>{user.nombre}</Text>
             <Text>{user.email}</Text>
-            {dateStr ? <Text style = {styles.date}>{new Date(dateStr).toLocaleString()}</Text> : null}
+            {dateStr ? <Text style = {styles.date}>{new Date(dateStr).toLocaleString()}</Text> : null} 
+
+            <View>
+                <Button title="Editar" onPress={onEdit} />
+            </View>
         </View>
     );
 }

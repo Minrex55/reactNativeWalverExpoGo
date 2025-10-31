@@ -20,7 +20,7 @@ export const getUserById = async(id:number) : Promise<User | undefined> => {
         return data
     } catch (error) {
         const all = await getUsers()
-        return all.find(user => user.id === id)
+        return all.find(u => u.id === id)
     }
 }
 
