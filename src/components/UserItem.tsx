@@ -5,18 +5,19 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 interface Props {
     user: any
     onEdit: () => void
+    onDelete: () => void
 }
 
-const UserItem = ({user, onEdit}: Props) => {
+const UserItem = ({user, onEdit, onDelete}: Props) => {
     const dateStr = user.creadoEn ?? user.createdAt ?? '';
     return (
         <View style = {styles.card}>  
             <Text style = {styles.name}>{user.nombre}</Text>
             <Text>{user.email}</Text>
             {dateStr ? <Text style = {styles.date}>{new Date(dateStr).toLocaleString()}</Text> : null} 
-
             <View>
                 <Button title="Editar" onPress={onEdit} />
+                <Button title="Eliminar" color='red' onPress={onDelete} />
             </View>
         </View>
     );

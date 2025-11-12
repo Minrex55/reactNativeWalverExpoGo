@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {View, FlatList, StyleSheet, Alert, RefreshControl} from 'react-native'
-import {getUsers} from '../services/userService'
+import {getUsers, deleteUser} from '../services/userService'
 import UserItem from "../components/UserItem";
 
 const UserListScreen = ({navigation}: any) => {
@@ -21,13 +21,30 @@ const UserListScreen = ({navigation}: any) => {
         return unsub;
     },[navigation])
 
+    const handleDelete = (id: number) => {
+        Alert.alert('Confirmar', '¿Estás seguro de que deseas eliminar este usuario?', [
+            {text: 'Cancelar', style: 'cancel'},
+            {text: 'Eliminar', style: 'destructive', onPress: async () => {
+                try {
+                    await deleteUser(id);
+                    setUsers(prev => prev.filter(u => u.id !== id));
+                } catch (e) {
+                    Alert.alert('Error', 'No se pudo eliminar el usuario');
+                    console.error(e)
+                }
+            }}
+        ])
+    }
 
     return(
         <View style={styles.container}>  
             <FlatList
             data={users}
             keyExtractor={it => it.id.toString()}
-            renderItem={({item}) => <UserItem user={item} onEdit={() => navigation.navigate('UpdateUser', { id: item.id })} />}
+            renderItem={({item}) => 
+            <UserItem 
+            user={item} onEdit={() => navigation.navigate('UpdateUser', { id: item.id })} 
+            onDelete={() => handleDelete(item.id)}/>}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={async () => {setRefreshing(true); await load(); setRefreshing(false);}} />}
             />
 
